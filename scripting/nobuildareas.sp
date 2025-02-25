@@ -63,10 +63,6 @@ public void OnPluginStart()
   RegAdminCmd("sm_shownobuild", CMD_ShowNoBuild, ADMFLAG_ROOT, "Shows all nobuild areas for 10 seconds to the client");
   RegAdminCmd("sm_cancelarea", CMD_CancelArea, ADMFLAG_ROOT, "Cancels the current area creation");
   
-  // Hook mouse wheel commands globally
-  AddCommandListener(Command_InvNext, "invnext");
-  AddCommandListener(Command_InvPrev, "invprev");
-  
   ConnectToDatabase();
   
   for (int i = 1; i <= MaxClients; i++)
@@ -402,32 +398,6 @@ public Action Timer_AreaPreview(Handle timer, int client)
   }
   
   return Plugin_Continue;
-}
-
-public Action Command_InvNext(int client, const char[] command, int args)
-{
-  if (client <= 0 || !IsClientInGame(client) || !g_bCreatingArea[client])
-    return Plugin_Continue;
-  
-  // Scroll up - increase height
-  g_fVerticalOffset[client] += HEIGHT_ADJUST_INCREMENT;
-  PrintHintText(client, "Height offset: %.0f units", g_fVerticalOffset[client]);
-  
-  // Block the original command from executing
-  return Plugin_Handled;
-}
-
-public Action Command_InvPrev(int client, const char[] command, int args)
-{
-  if (client <= 0 || !IsClientInGame(client) || !g_bCreatingArea[client])
-    return Plugin_Continue;
-  
-  // Scroll down - decrease height
-  g_fVerticalOffset[client] -= HEIGHT_ADJUST_INCREMENT;
-  PrintHintText(client, "Height offset: %.0f units", g_fVerticalOffset[client]);
-  
-  // Block the original command from executing
-  return Plugin_Handled;
 }
 
 public Action OnClientPreThink(int client)
