@@ -1,7 +1,7 @@
 #pragma semicolon 1
 #pragma newdecls required
 
-#define PLUGIN_AUTHOR "HelpMe (Modified by Claude)"
+#define PLUGIN_AUTHOR "ampere"
 #define PLUGIN_VERSION "2.2"
 
 #define TRIGGER_NAME "nobuild_entity"
